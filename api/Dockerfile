@@ -27,6 +27,8 @@ RUN mv security-agent.yaml /etc/datadog-agent/security-agent.yaml
 RUN mv system-probe.yaml /etc/datadog-agent/system-probe.yaml
 RUN mv datadog.yaml /etc/datadog-agent/datadog.yaml
 
+RUN chmod -R 777 /etc/datadog-agent
+
 EXPOSE 8080
 
 ENTRYPOINT exec /app/startup.sh
