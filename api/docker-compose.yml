@@ -3,7 +3,7 @@ version: '3.8'
 services:
   datadog-agent:
     image: gcr.io/datadoghq/agent:latest
-    container_name: datadog-agent
+    hostname: datadog-agent
     environment:
       DD_API_KEY: 07dd098280c741d1e0f8b19587d8f5ce
       DD_APM_ENABLED: true
@@ -13,6 +13,10 @@ services:
       - SYS_PTRACE
     pid: host
     privileged: true
+    ports:
+      - 8080:8080
+      - 8125:8125
+      - 8126:8126
     networks:
       - datadog-network
     restart: unless-stopped
@@ -25,7 +29,9 @@ services:
     depends_on:
       - datadog-agent
     ports:
-      - 8080:443
+      - 8080:8080
+      - 8125:8125
+      - 8126:8126
     networks:
       - datadog-network
 
