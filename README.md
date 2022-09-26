@@ -27,6 +27,9 @@ Pass: n0JTV6TKTliuKeen
   "password": "rJ18Q~wkibAQBkhpBHcGEW8yijeGUx3LOzv6Fb96",
   "tenant": "54d8183e-93dd-4d0c-ba30-5b931e0649cd"
 }
+
+jschmidt
+A4gVMq1G7bQJ
 ```
 
 ## Run With Agent
@@ -45,6 +48,13 @@ docker run -it --network "datadog-network" datadog-demo-api
 
 docker tag datadog-demo-api jpaulo0866/datadog-api
 docker push jpaulo0866/datadog-api
+
+
+npm run build
+docker build -t datadog-demo-client -f Dockerfile .
+docker run -it -p 9000:9000 datadog-demo-client
+docker tag datadog-demo-client jpaulo0866/datadog-client
+docker push jpaulo0866/datadog-client
 
 ```
 

@@ -1,19 +1,40 @@
-version: '3.8'
+version: '3.3'
+
+networks:
+  datadog-network:
+    driver: bridge
 
 services:
   datadog-agent:
+    container_name: datadog-agent
     image: gcr.io/datadoghq/agent:latest
     environment:
-      DD_API_KEY: 07dd098280c741d1e0f8b19587d8f5ce
-      DD_APM_ENABLED: true
-      DD_SITE: datadoghq.com
-      DD_APM_NON_LOCAL_TRAFFIC: true
-    restart: unless-stopped
+      DD_API_KEY: "07dd098280c741d1e0f8b19587d8f5ce"
+      DD_APM_ENABLED: "true"
+      DD_SITE: "datadoghq.com"
+      DD_APM_NON_LOCAL_TRAFFIC: "true"
+    networks:
+      - datadog-network
+    restart: always
 
   datadog-demo-api:
+    container_name: datadog-demo-api
     image: jpaulo0866/datadog-api
+    restart: always
+    environment:
+      DD_AGENT_HOST: "datadog-agent"
     depends_on:
       - datadog-agent
     ports:
-      - "80:8080"
-      - "443:8080"
+      - "8080:8080"
+    networks:
+      - datadog-network
+
+  datadog-demo-client:
+    container_name: datadog-demo-client
+    image: jpaulo0866/datadog-client
+    restart: always
+    ports:
+      - "9000:9000"
+    networks:
+      - datadog-network
