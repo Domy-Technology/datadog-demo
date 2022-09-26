@@ -1,0 +1,6 @@
+logs:
+  - type: file
+    path: '/app/logs/app.log'
+    service: java
+    source: java
+    sourcecategory: sourcecode

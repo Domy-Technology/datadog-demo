@@ -38,5 +38,14 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorder
 ## Dockerizando
 
 ```
+docker network create datadog-network
 
+docker build -t datadog-demo-api -f Dockerfile .
+docker run -it --network "datadog-network" datadog-demo-api
+```
+
+## Docker Agent
+
+```
+docker run -d --name datadog-agent --cgroupns host --pid host --network "datadog-network" -e DD_API_KEY=07dd098280c741d1e0f8b19587d8f5ce -e DD_APM_ENABLED=true -e DD_SITE=datadoghq.com -e DD_APM_NON_LOCAL_TRAFFIC=true gcr.io/datadoghq/agent:latest
 ```

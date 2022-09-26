@@ -1,0 +1,8 @@
+init_config:
+  is_jmx: true
+  collect_default_metrics: true
+
+instances:
+  - host: 127.0.0.1
+    port: 7489
+    name: demo-service
