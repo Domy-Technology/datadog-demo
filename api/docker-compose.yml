@@ -24,6 +24,8 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - datadog-agent
+    ports:
+      - 8080:443
     networks:
       - datadog-network
 
