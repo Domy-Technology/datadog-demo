@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  datadog-agent:
+    image: gcr.io/datadoghq/agent:latest
+    container_name: datadog-agent
+    environment:
+      DD_API_KEY: 07dd098280c741d1e0f8b19587d8f5ce
+      DD_APM_ENABLED: true
+      DD_SITE: datadoghq.com
+      DD_APM_NON_LOCAL_TRAFFIC: true
+    cap_add:
+      - SYS_PTRACE
+    pid: host
+    privileged: true
+    networks:
+      - datadog-network
+    restart: unless-stopped
+
+  datadog-demo-api:
+    image: jpaulo0866/datadog-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - datadog-agent
+    networks:
+      - datadog-network
+
+networks:
+  datadog-network:
+    driver: bridge

@@ -42,6 +42,10 @@ docker network create datadog-network
 
 docker build -t datadog-demo-api -f Dockerfile .
 docker run -it --network "datadog-network" datadog-demo-api
+
+docker tag datadog-demo-api jpaulo0866/datadog-api
+docker push jpaulo0866/datadog-api
+
 ```
 
 ## Docker Agent
