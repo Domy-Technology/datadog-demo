@@ -1,0 +1,10 @@
+metrics:
+  frequency: 5 seconds                       # Default is 1 second.
+  reporters:
+    - type: datadog
+      prefix: demoapi
+      transport:
+        type: udp
+        prefix:                             # Optional. Default is (empty)
+        statsdHost: "localhost"             # Optional. Default is "localhost"
+        port: 8125                          # Optional. Default is 8125

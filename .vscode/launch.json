@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch DatadogDemoApplication",
+            "request": "launch",
+            "mainClass": "br.com.domy.datadogdemo.DatadogDemoApplication",
+            "projectName": "datadog-demo"
+        },
+        {
+            "name": "Attach to Node Functions",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "preLaunchTask": "func: host start"
+        }
+    ]
+}

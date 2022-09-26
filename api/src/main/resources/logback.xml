@@ -1,0 +1,40 @@
+<configuration>
+    <springProperty scope="context" name="environment" source="spring.profiles.active" />
+    <springProperty scope="context" name="applicationName" source="spring.application.name" />
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+    <!-- <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>intake.logs.datadoghq.com:10514</destination>
+        <keepAliveDuration>10 seconds</keepAliveDuration>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>07dd098280c741d1e0f8b19587d8f5ce</pattern>
+                </layout>
+            </prefix>
+            
+        </encoder>
+        <ssl />
+    </appender> -->
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <logger name="br.com.domy" level="INFO">
+        <appender-ref ref="FILE" />
+        <!-- <appender-ref ref="JSON_TCP" /> -->
+    </logger>
+
+</configuration>
