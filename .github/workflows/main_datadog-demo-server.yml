@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
 
       - name: Build with Gradlew
-        run: gradlew clean build
+        run: ./gradlew clean build
         working-directory: ./api
 
       - name: Upload artifact for deployment job
