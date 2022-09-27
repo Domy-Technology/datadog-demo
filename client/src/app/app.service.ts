@@ -117,7 +117,6 @@ export class AppService {
     }, error.stack ?? '')
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
-      alert(error.error)
     } else {
       console.error(
         `Backend returned code ${error.status}, body was: ${body}`, error.error);
