@@ -103,4 +103,13 @@ export class AppComponent implements OnInit {
         complete: () => alert("Memory Stress Finalizado")
       })
   }
+
+  dispatchFillData = () => {
+    alert("Processo Disparado")
+    this.service.fillData()
+      .subscribe({
+        complete: () => alert("Load de Dados Iniciado")
+      })
+  }
+
 }

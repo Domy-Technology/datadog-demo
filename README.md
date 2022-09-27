@@ -43,18 +43,20 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorder
 ```
 docker network create datadog-network
 
+gradlew clean build
 docker build -t datadog-demo-api -f Dockerfile .
-docker run -it --network "datadog-network" datadog-demo-api
-
 docker tag datadog-demo-api jpaulo0866/datadog-api
 docker push jpaulo0866/datadog-api
 
 
 npm run build
 docker build -t datadog-demo-client -f Dockerfile .
-docker run -it -p 9000:9000 datadog-demo-client
 docker tag datadog-demo-client jpaulo0866/datadog-client
 docker push jpaulo0866/datadog-client
+
+
+docker run -it --network "datadog-network" datadog-demo-api
+docker run -it -p 9000:9000 datadog-demo-client
 
 ```
 

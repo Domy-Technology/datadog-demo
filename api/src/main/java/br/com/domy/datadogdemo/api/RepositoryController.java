@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -92,6 +93,16 @@ public class RepositoryController {
             });
 	}
 
+    @PostMapping("/random")
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
+	public void createOrUpdateRandom() {
+        var fillSize = new Random().nextInt(1000);
+        Thread newThread = new Thread(() -> {
+            fillDataBase(fillSize);
+        });
+        newThread.start();        
+	}
+
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable(name = "id") String id) {
@@ -107,17 +118,18 @@ public class RepositoryController {
             });
 	}
 
-    @PostConstruct
-    public void fillDatabaseAsync() {
-        Thread newThread = new Thread(() -> {
-            fillDataBase();
-        });
-        newThread.start();
-    }
+    // @PostConstruct
+    // public void fillDatabaseAsync() {
+    //     Thread newThread = new Thread(() -> {
+    //         fillDataBase(100000);
+    //     });
+    //     newThread.start();
+    // }
 
-    private void fillDataBase() {
+    private void fillDataBase(int fillSize) {
         var count = repository.count();
-        for (long i = count; i < 100000; i++) {
+        var finalSize = count + fillSize;
+        for (long i = count; i < finalSize; i++) {
             var demoEntity = DemoEntity.builder()
                 .active(indexIsActive(i))
                 .createdAt(LocalDateTime.now())

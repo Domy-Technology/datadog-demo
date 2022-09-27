@@ -82,6 +82,12 @@ export class AppService {
       .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
+  public fillData(): Observable<void> {
+    const url = `${environment.apiUrl}/repo/random`
+    return this.http.post<void>(url, null)
+      .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
+  }
+
   public cpuStress(): Observable<void> {
     const url = `${environment.apiUrl}/danger-zone/cpu-load`
     const body = {
