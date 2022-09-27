@@ -4,36 +4,47 @@ import { environment } from 'src/environments/environment';
 import { catchError, map, Observable, of, throwError } from "rxjs";
 import { Measurements } from "src/model/measurements";
 import { LoggingService } from "./logging.service";
+import { Environment } from "./environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  constructor(private http: HttpClient, private log: LoggingService) { }
+  private env: Environment
+
+  constructor(private http: HttpClient, private log: LoggingService) {
+    this.env = {
+      apiUrl: environment.apiUrl
+    }
+  }
+
+  public changeEnv(url: string): void {
+    this.env.apiUrl = url;
+  }
 
   public getServiceStatus(): Observable<string> {
-    return this.http.get<any>(`${environment.apiUrl}/actuator/health`)
+    return this.http.get<any>(`${this.env.apiUrl}/actuator/health`)
         .pipe(map(response => response.status))
         .pipe(catchError((error: any) => of("DOWN")))
   }
 
   public getHttpMetrics(): Observable<Measurements[]> {
-    const url = `${environment.apiUrl}/actuator/metrics/http.server.requests`
+    const url = `${this.env.apiUrl}/actuator/metrics/http.server.requests`
     return this.http.get<any>(url)
         .pipe(map(response => response.measurements))
         .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
   public getMongoMetrics(): Observable<Measurements[]> {
-    const url = `${environment.apiUrl}/actuator/metrics/mongodb.driver.commands`
+    const url = `${this.env.apiUrl}/actuator/metrics/mongodb.driver.commands`
     return this.http.get<any>(url)
         .pipe(map(response => response.measurements))
         .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
   public getApplicationReadyTime(): Observable<number> {
-    const url = `${environment.apiUrl}/actuator/metrics/application.ready.time`
+    const url = `${this.env.apiUrl}/actuator/metrics/application.ready.time`
     return this.http.get<any>(url)
         .pipe(map(response => response.measurements))
         .pipe(map(response => response[0]?.value ?? 0))
@@ -41,55 +52,55 @@ export class AppService {
   }
 
   public getElementCount(): Observable<number> {
-    return this.http.get<any>(`${environment.apiUrl}/repo/count`)
+    return this.http.get<any>(`${this.env.apiUrl}/repo/count`)
         .pipe(map(response => response))
         .pipe(catchError((error: any) => of(0)))
   }
 
   public demoOk(): Observable<void> {
-    const url = `${environment.apiUrl}/demo/ok`
+    const url = `${this.env.apiUrl}/demo/ok`
     return this.http.get<void>(url)
       .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
   public demoFailure(): Observable<void> {
-    const url = `${environment.apiUrl}/demo/failure`
+    const url = `${this.env.apiUrl}/demo/failure`
     return this.http.get<void>(url)
       .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
   public slowOk(): Observable<void> {
-    const url = `${environment.apiUrl}/slow/ok`
+    const url = `${this.env.apiUrl}/slow/ok`
     return this.http.get<void>(url)
       .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
   public slowFailure(): Observable<void> {
-    const url = `${environment.apiUrl}/slow/failure`
+    const url = `${this.env.apiUrl}/slow/failure`
     return this.http.get<void>(url)
       .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
   public cpuLoad(): Observable<string> {
-    const url = `${environment.apiUrl}/danger-zone/cpu-destroy/${environment.cpuLoadInteractions}`
+    const url = `${this.env.apiUrl}/danger-zone/cpu-destroy/${environment.cpuLoadInteractions}`
     return this.http.post<string>(url, null)
       .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
   public memoryStress(): Observable<void> {
-    const url = `${environment.apiUrl}/danger-zone/gc-destroy`
+    const url = `${this.env.apiUrl}/danger-zone/gc-destroy`
     return this.http.post<void>(url, null)
       .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
   public fillData(): Observable<void> {
-    const url = `${environment.apiUrl}/repo/random`
+    const url = `${this.env.apiUrl}/repo/random`
     return this.http.post<void>(url, null)
       .pipe(catchError((error: any) => this.handleRequestError(error, null, url)))
   }
 
   public cpuStress(): Observable<void> {
-    const url = `${environment.apiUrl}/danger-zone/cpu-load`
+    const url = `${this.env.apiUrl}/danger-zone/cpu-load`
     const body = {
       "numCore": environment.cpuLoadNumCore,
       "numThreadsPerCore": environment.cpuLoadNumThreads,

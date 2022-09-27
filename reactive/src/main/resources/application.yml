@@ -9,12 +9,15 @@ datadog:
 
 spring:
   application:
-    name: datadog-demo-api
+    name: datadog-reactive-demo-api
   profiles:
     active: dev
   data:
     mongodb:
       uri: "mongodb+srv://jschmidt:n0JTV6TKTliuKeen@demo-cluster.pusgic3.mongodb.net/demo-data?retryWrites=true&w=majority"
+
+server:
+  port: 8081
 
 management:
   endpoints:

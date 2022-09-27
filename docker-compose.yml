@@ -17,6 +17,19 @@ services:
       - datadog-network
     restart: always
 
+  datadog-reactive-demo-api:
+    container_name: datadog-reactive-demo-api
+    image: jpaulo0866/reactive-datadog-api
+    restart: always
+    environment:
+      DD_AGENT_HOST: "datadog-agent"
+    depends_on:
+      - datadog-agent
+    ports:
+      - "8081:8081"
+    networks:
+      - datadog-network
+
   datadog-demo-api:
     container_name: datadog-demo-api
     image: jpaulo0866/datadog-api

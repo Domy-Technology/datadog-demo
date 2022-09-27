@@ -14,6 +14,12 @@ export class AppComponent implements OnInit {
   applicationReadyTime = 0;
   httpMetrics: Measurements[] = []
   mongoMetrics: Measurements[] = []
+  envs = [
+    "http://localhost:8080",
+    "http://localhost:8081",
+    "https://datadog-demo-api.azurewebsites.net",
+  ]
+  env: string = ''
 
   constructor (private service: AppService) {}
 
@@ -58,6 +64,11 @@ export class AppComponent implements OnInit {
       .subscribe({
         next: (_response => this.applicationReadyTime = _response)
       })
+  }
+
+  dispatchChangeEnv = () => {
+    this.service.changeEnv(this.env)
+    this.ngOnInit();
   }
 
   dispatchOkTest = () => {

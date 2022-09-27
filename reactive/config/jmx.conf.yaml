@@ -5,4 +5,4 @@ init_config:
 instances:
   - host: 127.0.0.1
     port: 7489
-    name: datadog-demo-api
+    name: datadog-reative-demo-api
