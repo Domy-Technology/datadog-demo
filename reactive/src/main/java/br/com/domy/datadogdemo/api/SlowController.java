@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -36,12 +37,9 @@ public class SlowController {
     @SneakyThrows
 	public Mono<Void> failureMethod() {
 		return Mono.fromRunnable(() -> {
-			try {
-				Thread.sleep((long) (Math.random() * 5000));
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
+			var rest = new RestTemplate();
+			var response = rest.getForEntity("https://catfact.ninja/fact", String.class);
+			log.info("Resposta HTTP {}", response.getBody());
 			log.info("test 500");
 			throw new RuntimeException();
 		});

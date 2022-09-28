@@ -12,6 +12,19 @@ java -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxr
 java -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Dspring.boot.project.name=datadog-demo -Djava.rmi.server.hostname=localhost -jar build/libs/datadog-demo-0.0.1-SNAPSHOT.jar
 ```
 
+```
+set JAVA_OPTS="-javaagent:'dd-java-agent.jar' -Ddd.agent.port=8126 -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=datadog-reactive-demo-api -Ddd.env=dev -Ddd.version=1.0 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7489 -Dcom.sun.management.jmxremote.rmi.port=12349 -Dcom.sun.management.jmxremote.ssl=false -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.rmi.server.hostname=localhost -Ddd.appsec.enabled=true -XX:+AllowRedefinitionToAddDeleteMethods -Xms256M -Xmx1G"
+```
+
+```
+java -javaagent:dd-java-agent.jar -Ddd.agent.port=8126 -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=datadog-reactive-demo-api -Ddd.env=dev -Ddd.version=1.0 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7489 -Dcom.sun.management.jmxremote.rmi.port=12349 -Dcom.sun.management.jmxremote.ssl=false -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.rmi.server.hostname=localhost -Ddd.appsec.enabled=true -XX:+AllowRedefinitionToAddDeleteMethods -Xms256M -Xmx1G -jar build/libs/reactive-datadog-api-0.0.1-SNAPSHOT.jar     
+```
+
+```
+java -Ddd.agent.port=8126 -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=datadog-reactive-demo-api -Ddd.env=dev -Ddd.version=1.0 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7489 -Dcom.sun.management.jmxremote.rmi.port=12349 -Dcom.sun.management.jmxremote.ssl=false -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.rmi.server.hostname=localhost -Ddd.appsec.enabled=true -XX:+AllowRedefinitionToAddDeleteMethods -Xms256M -Xmx1G -jar build/libs/reactive-datadog-api-0.0.1-SNAPSHOT.jar     
+```
+
+
 ## Database
 
 ```

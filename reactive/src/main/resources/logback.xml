@@ -17,10 +17,7 @@
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />
-    </root>
-
-    <logger name="br.com.domy" level="INFO">
         <appender-ref ref="FILE" />
-    </logger>
+    </root>
 
 </configuration>
