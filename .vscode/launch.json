@@ -3,6 +3,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ReactiveDatadogApiApplication",
+            "request": "launch",
+            "mainClass": "br.com.domy.datadogdemo.ReactiveDatadogApiApplication",
+            "projectName": "reactive-datadog-api",
+            "vmArgs": "-XX:+AllowRedefinitionToAddDeleteMethods"
+        },
+        {
+            "type": "java",
             "name": "Launch DatadogDemoApplication",
             "request": "launch",
             "mainClass": "br.com.domy.datadogdemo.DatadogDemoApplication",

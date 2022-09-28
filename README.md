@@ -7,6 +7,8 @@ cd api
 ./gradlew clean build
 java -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=7489 -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Dspring.boot.project.name=datadog-demo -Djava.rmi.server.hostname=localhost -jar build/libs/datadog-demo-0.0.1-SNAPSHOT.jar
 
+java -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=7489 -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Dspring.boot.project.name=datadog-demo -Djava.rmi.server.hostname=localhost -XX:+AllowRedefinitionToAddDeleteMethods -jar build/libs/reactive-datadog-api-0.0.1-SNAPSHOT.jar
+
 java -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Dspring.boot.project.name=datadog-demo -Djava.rmi.server.hostname=localhost -jar build/libs/datadog-demo-0.0.1-SNAPSHOT.jar
 ```
 

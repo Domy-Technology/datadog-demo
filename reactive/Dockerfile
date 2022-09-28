@@ -12,7 +12,7 @@ RUN apt-get install wget curl apt-transport-https
 RUN DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=07dd098280c741d1e0f8b19587d8f5ce DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 RUN wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
 
-ENV JAVA_OPTS="-javaagent:/app/dd-java-agent.jar -Ddd.agent.port=8126 -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=datadog-demo-api -Ddd.env=dev -Ddd.version=1.0 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7489 -Dcom.sun.management.jmxremote.rmi.port=12349 -Dcom.sun.management.jmxremote.ssl=false -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.rmi.server.hostname=localhost -Ddd.appsec.enabled=true -Xms256M -Xmx1G"
+ENV JAVA_OPTS="-javaagent:/app/dd-java-agent.jar -Ddd.agent.port=8126 -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=datadog-reactive-demo-api -Ddd.env=dev -Ddd.version=1.0 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7489 -Dcom.sun.management.jmxremote.rmi.port=12349 -Dcom.sun.management.jmxremote.ssl=false -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.rmi.server.hostname=localhost -Ddd.appsec.enabled=true -Xms256M -Xmx1G"
 ENV DD_API_KEY=07dd098280c741d1e0f8b19587d8f5ce
 ENV DD_ENV=prd
 ENV DD_SERVICE=reactive-datadog-api
