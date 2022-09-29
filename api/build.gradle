@@ -34,12 +34,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
-	// Datadog
-	implementation 'com.datadoghq:java-dogstatsd-client:3.0.0'
-	
 	// Metrics
 	runtimeOnly 'io.micrometer:micrometer-registry-datadog'
-	implementation 'org.coursera:dropwizard-metrics-datadog:1.1.13'
 
 	// Logging
 	implementation 'net.logstash.logback:logstash-logback-encoder:7.2'

@@ -31,11 +31,7 @@
     <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
+        <!-- <appender-ref ref="JSON_TCP" /> -->
     </root>
-
-    <!-- <logger name="br.com.domy" level="INFO">
-        <appender-ref ref="FILE" />
-        <appender-ref ref="JSON_TCP" />
-    </logger> -->
 
 </configuration>

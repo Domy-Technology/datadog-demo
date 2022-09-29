@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
+import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -69,7 +71,11 @@ public class DemoController {
 				e.printStackTrace();
 			}
 			log.info("test 200");
-		});
+		})
+				.delayElement(Duration.ofSeconds(10))
+				.cache()
+				.then()
+				.subscribeOn(Schedulers.parallel());
 	}
 
 	@GetMapping("http-client-block")
@@ -82,6 +88,8 @@ public class DemoController {
 			var responseData = response.getBody();
 			log.info("Resposta HTTP {}", responseData);
 			return responseData;
-		});
+		}).delayElement(Duration.ofSeconds(10))
+				.cache()
+				.subscribeOn(Schedulers.parallel());
 	}
 }
