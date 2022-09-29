@@ -64,9 +64,16 @@ docker tag datadog-demo-api jpaulo0866/datadog-api
 docker push jpaulo0866/datadog-api
 
 gradlew clean build
+docker build -t datadog-reactive-with-block-demo-api -f Dockerfile .
+docker tag datadog-reactive-with-block-demo-api jpaulo0866/reactive-with-block-datadog-api
+docker push jpaulo0866/reactive-with-block-datadog-api
+
+
+gradlew clean build
 docker build -t datadog-reactive-demo-api -f Dockerfile .
 docker tag datadog-reactive-demo-api jpaulo0866/reactive-datadog-api
 docker push jpaulo0866/reactive-datadog-api
+
 
 npm run build
 docker build -t datadog-demo-client -f Dockerfile .

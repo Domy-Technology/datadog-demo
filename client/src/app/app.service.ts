@@ -120,7 +120,6 @@ export class AppService {
     } else {
       console.error(
         `Backend returned code ${error.status}, body was: ${body}`, error.error);
-      alert(`Backend returned code ${error.status}, body was: ${body}`)
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }

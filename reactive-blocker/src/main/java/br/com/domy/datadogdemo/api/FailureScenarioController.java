@@ -1,14 +1,21 @@
 package br.com.domy.datadogdemo.api;
 
+import java.util.Vector;
+
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.domy.datadogdemo.api.model.BusyThread;
 import br.com.domy.datadogdemo.api.model.CpuLoadModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
-
-import javax.validation.Valid;
-import java.util.Vector;
 
 @RestController
 @CrossOrigin("*")

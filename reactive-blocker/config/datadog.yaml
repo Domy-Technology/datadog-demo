@@ -1,0 +1,22 @@
+api_key: 07dd098280c741d1e0f8b19587d8f5ce
+site: datadoghq.com
+
+logs_enabled: true
+
+process_config:
+
+  process_collection:
+    enabled: true
+
+  enabled: true
+
+use_dogstatsd: true
+
+dogstatsd_port: 8125
+
+GUI_port: 50006
+
+apm_config:
+  enabled: true
+  # receiver_port: 8135
+  apm_non_local_traffic: true

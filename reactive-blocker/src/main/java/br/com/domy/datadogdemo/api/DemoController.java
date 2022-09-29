@@ -21,7 +21,7 @@ import java.util.List;
 @CrossOrigin(value = "*")
 public class DemoController {
 
-    @GetMapping("/logging/ok")
+	@GetMapping("/logging/ok")
 	public Mono<Void> okLogging() {
 		List<Runnable> logs = List.of(
 				() -> log.info("Gerando Métricas Sobre a Venda"),
@@ -57,9 +57,9 @@ public class DemoController {
 	}
 
 	@GetMapping("block-thread")
-    @SneakyThrows
+	@SneakyThrows
 	public Mono<Void> blockThread() {
-   		return Mono.fromRunnable(() -> {
+		return Mono.fromRunnable(() -> {
 			try {
 				var time = Math.random() * 2000;
 				log.info("Gerando Sleep Thread por {} ms", time);
@@ -73,7 +73,7 @@ public class DemoController {
 	}
 
 	@GetMapping("http-client-block")
-    @SneakyThrows
+	@SneakyThrows
 	public Mono<String> clientBlock() {
 		return Mono.fromCallable(() -> {
 			var rest = new RestTemplate();

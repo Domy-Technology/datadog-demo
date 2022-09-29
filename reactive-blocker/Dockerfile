@@ -3,7 +3,7 @@ FROM eclipse-temurin:17
 WORKDIR /app
 
 ARG JAR_FILE
-COPY build/libs/datadog-reactive-demo-api-0.0.1-SNAPSHOT.jar app.jar
+COPY build/libs/datadog-reactive-with-hound-demo-api-0.0.1-SNAPSHOT.jar app.jar
 COPY config/* .
 
 RUN chmod +x startup.sh
@@ -12,10 +12,10 @@ RUN apt-get install wget curl apt-transport-https
 RUN DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=07dd098280c741d1e0f8b19587d8f5ce DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 RUN wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
 
-ENV JAVA_OPTS="-javaagent:/app/dd-java-agent.jar -Ddd.agent.port=8126 -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=datadog-reactive-demo-api -Ddd.env=dev -Ddd.version=1.0 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7489 -Dcom.sun.management.jmxremote.rmi.port=12349 -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.rmi.server.hostname=localhost -Ddd.appsec.enabled=true -Xms256M -Xmx1G"
+ENV JAVA_OPTS="-javaagent:/app/dd-java-agent.jar -Ddd.agent.port=8126 -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=datadog-reactive-with-hound-demo-api -Ddd.env=dev -Ddd.version=1.0 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7489 -Dcom.sun.management.jmxremote.rmi.port=12349 -Dcom.sun.management.jmxremote.ssl=false -XX:+ShowCodeDetailsInExceptionMessages -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.rmi.server.hostname=localhost -Ddd.appsec.enabled=true -XX:+AllowRedefinitionToAddDeleteMethods -Xms256M -Xmx1G"
 ENV DD_API_KEY=07dd098280c741d1e0f8b19587d8f5ce
 ENV DD_ENV=prd
-ENV DD_SERVICE=datadog-reactive-demo-api
+ENV DD_SERVICE=datadog-reactive-with-hound-demo-api
 ENV DD_SITE=datadoghq.com
 ENV DD_APM_ENABLED=true
 ENV DD_AGENT_HOST=datadog-agent
@@ -29,6 +29,6 @@ RUN mv datadog.yaml /etc/datadog-agent/datadog.yaml
 
 RUN chmod -R 777 /etc/datadog-agent
 
-EXPOSE 8081
+EXPOSE 8082
 
 ENTRYPOINT exec /app/startup.sh && bash

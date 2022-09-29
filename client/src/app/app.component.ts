@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   envs = [
     "http://localhost:8080",
     "http://localhost:8081",
+    "http://localhost:8082",
     "https://datadog-demo-api.azurewebsites.net",
   ]
   env: string = ''

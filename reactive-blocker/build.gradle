@@ -31,6 +31,8 @@ dependencies {
 
 	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.4'
 
+	implementation 'io.projectreactor.tools:blockhound:1.0.6.RELEASE'
+
 	// Datadog
 	implementation 'com.datadoghq:java-dogstatsd-client:3.0.0'
 
